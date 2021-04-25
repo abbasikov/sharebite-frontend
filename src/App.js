@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import ErrorBoundary from "./ErrorBoundary";
+import {Provider} from "react-redux";
+import {Step, Segment} from 'semantic-ui-react';
+import { store } from './redux/store/configureStore';
+import 'semantic-ui-css/semantic.min.css';
+import VerticalMenu from "./components/verticalmenu/verticalmenu";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+
+    return (
+          <ErrorBoundary>
+            <Provider store={store}>
+                <Segment>
+                    <Step.Group>
+                        <VerticalMenu title={'Menu Sections'} id={'section'}/>
+                        <VerticalMenu title={'Items'} id={'item'}/>
+                        <VerticalMenu title={'Item Options'} id={'option'}/>
+                        <VerticalMenu title={'Option Choices'} id={'choice'} />
+                    </Step.Group>
+                </Segment>
+            </Provider>
+          </ErrorBoundary>
+      );
 }
 
 export default App;
