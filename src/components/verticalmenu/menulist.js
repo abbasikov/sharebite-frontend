@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {Menu} from "semantic-ui-react";
 import { useDispatch } from 'react-redux';
-import {setSelectedSection} from "../../redux/actions";
+import {setSelectedChoice, setSelectedItem, setSelectedOption, setSelectedSection} from "../../redux/actions";
 import NoDataFound from "./nodatafound";
 
 const MenuList = ({id,list})=>{
@@ -12,6 +12,15 @@ const MenuList = ({id,list})=>{
         switch (id){
             case 'section':
                 dispatch(setSelectedSection(val));
+                break;
+            case 'item':
+                dispatch(setSelectedItem(val));
+                break;
+            case 'option':
+                dispatch(setSelectedOption(val));
+                break;
+            case 'choice':
+                dispatch(setSelectedChoice(val));
                 break;
         }
     }

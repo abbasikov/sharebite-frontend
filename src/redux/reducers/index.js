@@ -25,6 +25,7 @@ const objectAssign = Object.assign || require('object.assign');
 // Never mutate or manipulate state directly. Always return a new state.
 export default function rootReducer(state = INITIAL_STATE, action = null) {
   console.log('in reducer::type ', action.type)
+  console.log('in reducer::state ', state);
   switch (action.type) {
     case SET_SELECTED_SECTION:
       return objectAssign({}, state, {
