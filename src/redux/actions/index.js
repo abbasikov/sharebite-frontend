@@ -4,7 +4,9 @@ import {
   SET_SELECTED_OPTION,
   SET_SELECTED_CHOICE,
   SET_ADD_SECTION,
-  SET_ADD_ITEM
+  SET_ADD_ITEM,
+  SET_ADD_OPTION,
+  SET_ADD_CHOICE
 } from '../../constants/AppConstants';
 import _ from 'lodash';
 
@@ -52,4 +54,12 @@ export const setAddSection = (value) => (dispatch) => {
 
 export const setAddItem = (value) => (dispatch) => {
   dispatch({ type: SET_ADD_ITEM, payload: value });
+}
+
+export const setAddOption = (value) => (dispatch) => {
+  dispatch({ type: SET_ADD_OPTION, payload: value });
+}
+
+export const setAddChoice = (value) => (dispatch) => {
+  dispatch({ type: SET_ADD_CHOICE, payload: value });
 }

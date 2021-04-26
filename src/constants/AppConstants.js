@@ -44,4 +44,6 @@ export const SET_SELECTED_CHOICE = 'SET_SELECTED_CHOICE';
 
 export const SET_ADD_SECTION = 'SET_ADD_SECTION';
 export const SET_ADD_ITEM = 'SET_ADD_ITEM';
+export const SET_ADD_OPTION = 'SET_ADD_OPTION';
+export const SET_ADD_CHOICE = 'SET_ADD_CHOICE';
 

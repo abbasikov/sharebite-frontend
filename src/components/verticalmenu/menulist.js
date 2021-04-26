@@ -26,8 +26,6 @@ const MenuList = ({id,list})=>{
                 break;
         }
     }
-    console.log('MenuList::id: ',id);
-    console.log('MenuList::list: ',list);
 
     const getListData = ()=>{
         const listToReturn= list.map(str=>{

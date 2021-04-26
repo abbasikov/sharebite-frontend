@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import NoDataFound from "./nodatafound";
 import MenuList from "./menulist";
 import _ from 'lodash';
-import {setAddSection, setAddItem} from "../../redux/actions";
+import {setAddSection, setAddItem, setAddOption, setAddChoice} from "../../redux/actions";
 
 const VerticalMenu = ({title, id})=>{
     const state = useSelector(state => state);
@@ -27,21 +27,41 @@ const VerticalMenu = ({title, id})=>{
                     }))
                     break;
                 case 'item':
-                    dispatch(setAddItem({
-                        title:inputValue,
-                        price:0,
-                        options:[]
-                    }))
+                    if(!_.isEmpty(state.selectedSection)){
+                        dispatch(setAddItem({
+                            title:inputValue,
+                            price:0,
+                            options:[]
+                        }))
+                    }else{
+                        alert('Section must be selected to add an item.')
+                    }
+
                     break;
                 case 'option':
+                    if(!_.isEmpty(state.selectedItem)){
+                        dispatch(setAddOption({
+                            name:inputValue,
+                            choices:[]
+                        }))
+                    }else{
+                        alert('Item must be selected to add an option.')
+                    }
                     break;
                 case 'choice':
+                    if(!_.isEmpty(state.selectedOption)){
+                        dispatch(setAddChoice({
+                            name:inputValue,
+                            price:0
+                        }));
+                    }else{
+                        alert('Option must be selected to add a choice.')
+                    }
                     break;
                 default:
                     break;
             }
             toggleAdd();
-
         }
     }
 

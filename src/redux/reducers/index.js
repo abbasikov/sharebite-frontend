@@ -17,7 +17,9 @@ import {
   SET_SELECTED_OPTION,
   SET_SELECTED_CHOICE,
   SET_ADD_SECTION,
-  SET_ADD_ITEM
+  SET_ADD_ITEM,
+  SET_ADD_OPTION,
+  SET_ADD_CHOICE
 } from '../../constants/AppConstants';
 
 // Object.assign is not yet fully supported in all browsers, so we fallback to a polyfill
@@ -26,8 +28,6 @@ const objectAssign = Object.assign || require('object.assign');
 // Takes care of changing the application state
 // Never mutate or manipulate state directly. Always return a new state.
 export default function rootReducer(state = INITIAL_STATE, action = null) {
-  console.log('in reducer::type ', action.type)
-  console.log('in reducer::state ', state);
   switch (action.type) {
     case SET_SELECTED_SECTION:
       return objectAssign({}, state, {
@@ -53,6 +53,36 @@ export default function rootReducer(state = INITIAL_STATE, action = null) {
       state.sections.forEach(s=>{
         if(s.name === state.selectedSection.name){
           s.items.push(action.payload)
+        }
+      })
+      return objectAssign({}, state, {
+        sections: [...state.sections]
+      });
+    case SET_ADD_OPTION:
+      state.sections.forEach(s=>{
+        if(s.name === state.selectedSection.name){
+          s.items.forEach(itemObj=>{
+            if(itemObj.title === state.selectedItem.title){
+              itemObj.options.push(action.payload)
+            }
+          })
+        }
+      })
+      return objectAssign({}, state, {
+        sections: [...state.sections]
+      });
+    case SET_ADD_CHOICE:
+      state.sections.forEach(s=>{
+        if(s.name === state.selectedSection.name){
+          s.items.forEach(itemObj=>{
+            if(itemObj.title === state.selectedItem.title){
+              itemObj.options.forEach(optionObject=>{
+                if(optionObject.name === state.selectedOption.name){
+                  optionObject.choices.push(action.payload);
+                }
+              })
+            }
+          })
         }
       })
       return objectAssign({}, state, {
