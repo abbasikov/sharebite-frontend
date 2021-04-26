@@ -15,7 +15,9 @@ import {
   SET_SELECTED_SECTION,
   SET_SELECTED_ITEM,
   SET_SELECTED_OPTION,
-  SET_SELECTED_CHOICE
+  SET_SELECTED_CHOICE,
+  SET_ADD_SECTION,
+  SET_ADD_ITEM
 } from '../../constants/AppConstants';
 
 // Object.assign is not yet fully supported in all browsers, so we fallback to a polyfill
@@ -42,6 +44,19 @@ export default function rootReducer(state = INITIAL_STATE, action = null) {
     case SET_SELECTED_CHOICE:
       return objectAssign({}, state, {
         selectedChoice: _.isEmpty(action.payload) ? {} : action.payload
+      });
+    case SET_ADD_SECTION:
+      return objectAssign({}, state, {
+        sections: [...state.sections, action.payload]
+      });
+    case SET_ADD_ITEM:
+      state.sections.forEach(s=>{
+        if(s.name === state.selectedSection.name){
+          s.items.push(action.payload)
+        }
+      })
+      return objectAssign({}, state, {
+        sections: [...state.sections]
       });
     default:
       return state;

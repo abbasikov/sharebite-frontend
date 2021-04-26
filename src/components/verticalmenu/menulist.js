@@ -22,6 +22,8 @@ const MenuList = ({id,list})=>{
             case 'choice':
                 dispatch(setSelectedChoice(val));
                 break;
+            default:
+                break;
         }
     }
     console.log('MenuList::id: ',id);

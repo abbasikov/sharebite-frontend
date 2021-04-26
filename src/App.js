@@ -7,8 +7,8 @@ import { store } from './redux/store/configureStore';
 import 'semantic-ui-css/semantic.min.css';
 import VerticalMenu from "./components/verticalmenu/verticalmenu";
 
-const App = () => {
 
+const App = () => {
     return (
           <ErrorBoundary>
             <Provider store={store}>

@@ -1,12 +1,53 @@
-import React from 'react';
-import {Header, Step} from "semantic-ui-react";
-import { useSelector } from 'react-redux'
+import React, {useState} from 'react';
+import {Header, Step, Button, Transition, Input} from "semantic-ui-react";
+import { useSelector, useDispatch } from 'react-redux'
 import NoDataFound from "./nodatafound";
 import MenuList from "./menulist";
 import _ from 'lodash';
+import {setAddSection, setAddItem} from "../../redux/actions";
 
 const VerticalMenu = ({title, id})=>{
     const state = useSelector(state => state);
+    const dispatch = useDispatch();
+    const [inputVisible, setInputVisible] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+
+    const toggleAdd = ()=>{
+        setInputValue('');
+        setInputVisible(!inputVisible);
+    }
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            switch (id){
+                case 'section':
+                    dispatch(setAddSection({
+                        name:inputValue,
+                        items:[]
+                    }))
+                    break;
+                case 'item':
+                    dispatch(setAddItem({
+                        title:inputValue,
+                        price:0,
+                        options:[]
+                    }))
+                    break;
+                case 'option':
+                    break;
+                case 'choice':
+                    break;
+                default:
+                    break;
+            }
+            toggleAdd();
+
+        }
+    }
+
+    const onChangeInput = (e,data)=>{
+        setInputValue(data.value);
+    }
 
     const getMenuList = ()=>{
         switch (id){
@@ -46,13 +87,15 @@ const VerticalMenu = ({title, id})=>{
         }
     }
 
-
     return (
         <Step>
             <Step.Content>
                 <Header as='h3' dividing>
-                    {title}
+                    {title} <Button onClick={toggleAdd} color={'orange'} compact>Add</Button>
                 </Header>
+                <Transition visible={inputVisible} animation='slide down' duration={500}>
+                    <Input onChange={onChangeInput} value={inputValue} onKeyDown={handleKeyDown} placeholder='Enter name of section' />
+                </Transition>
                 {getMenuList()}
             </Step.Content>
         </Step>

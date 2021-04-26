@@ -28,7 +28,8 @@ export const INITIAL_STATE = {
         ]
       }]
     }]
-  }],
+  }
+  ],
   selectedSection:'',
   selectedItem: {},
   selectedOption:{},
@@ -40,4 +41,7 @@ export const SET_SELECTED_SECTION = 'SET_SELECTED_SECTION';
 export const SET_SELECTED_ITEM = 'SET_ITEM';
 export const SET_SELECTED_OPTION = 'SET_SELECTED_OPTION';
 export const SET_SELECTED_CHOICE = 'SET_SELECTED_CHOICE';
+
+export const SET_ADD_SECTION = 'SET_ADD_SECTION';
+export const SET_ADD_ITEM = 'SET_ADD_ITEM';
 
